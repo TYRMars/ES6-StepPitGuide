@@ -1,9 +1,8 @@
 <h1 align="center">ES6，新语法学习。帮助解析框架。</h1>
-<p align="center"><img src="http://www.cssxt.com/uploadfile/2017/0705/20170705105116854.jpeg" /></p>
+<p align="center"><img src="http://www.liuhaihua.cn/wp-content/uploads/2016/02/uuUFNjm.png" /></p>
 
 ---
 
-<p align="center"><img src="http://www.liuhaihua.cn/wp-content/uploads/2016/02/uuUFNjm.png" /></p>
 
 ## 目录
 * [01-01](https://github.com/TYRMars/JSLearn-ES6#01-01) `Let、const命令`
@@ -76,3 +75,84 @@ function last() {
 last();
 ```
 * 当定义对象时（引用类型），`const`定义的对象存储的指针，指针无法改变，但是对象是可以改变的
+
+---
+
+
+#### JS作用域
+```JavaScript
+import React from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+class App extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        this.state ={
+          initDone: false
+        }
+    }
+    render() {
+        return (
+            <div>
+                {
+                  this.state.initDone
+                  ? this.props.children
+                  : <div>努力加载中！！！！</div>
+                }
+            </div>
+        )
+    }
+    componentDidMount(){
+      setTimeout(() => {
+        this.setState({
+          initDone:true
+        })
+      },1000)
+    }
+}
+
+export default App
+```
+* 错误的使用
+
+```JavaScript
+//ES5
+console.log(this); //App对象
+setTimeout(function () {
+  console.log(this); //Window对象
+  this.setState({
+    initDone:true
+  })
+},1000)
+```
+#### 解决方法
+* ES5 `var`
+
+```JavaScript
+//ES5
+console.log(this); //App对象
+var that = this;
+setTimeout(function () {
+  console.log(that); //App对象
+  // this.setState({
+  //   initDone:true
+  // })
+},1000)
+```
+
+* ES6 `=>`
+
+```JavaScript
+//ES6
+console.log(this); //App对象
+setTimeout(() => {
+  console.log(this); //App对象
+        this.setState({
+          initDone:true
+
+        })
+      },1000)
+```
+
+
+---
