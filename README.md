@@ -154,5 +154,129 @@ setTimeout(() => {
       },1000)
 ```
 
+## 01-02
+### 解析解构
+* 解析解构的分类
 
+| 数组解构赋值      | 对象解构赋值    | 字符解构赋值  |
+| --------------- |:-------------:| -----------:|
+| 布尔类型解构赋值   | 函数参数解构赋值 | 数值解构赋值  |
+
+* JS对象的数据类型
+* 数组与对象
+
+#### 数组类型的解构赋值
+
+```JavaScript
+//ES6
+{
+  let a,b,rest;
+  [a,b]=[1,2]
+  console.log(a,b);
+}
+//ES5
+{
+  var a = void 0,
+      b = void 0,
+      test = void 0;
+    a = 1;
+    b = 2;
+    console.log(a,b);
+}
+//ES6
+{
+  let a,b,rest;
+  [a,b,...rest]=[1,2,3,4,5,6];//a=1,b=2,rest = [3,4,5,6]
+  console.log(a,b,rest);
+}
+```
+#### 对象解构赋值
+
+```JavaScript
+//ES6
+{
+  let a,b;
+  ({a,b}={a:1,b:2})
+  console.log(a,b);//1,2
+}
+```
+#### 解构赋值
+
+```JavaScript
+{
+  let a,b,c,rest;
+  [a,b,c=3]=[1,2];
+  console.log(a,b,c);//1,2,3
+}
+```
+
+* 如果解构赋值没有成功配对,c变量为undefind，只声明无赋值
+
+```JavaScript
+{
+  let a,b,c,rest;
+  [a,b,c]=[1,2];
+  console.log(a,b,c);//1,2,undefind
+}
+```
+
+* 数组解构赋值-变量替换（无需使用中间变量）
+
+```JavaScript
+//变量交换
+{
+  let a = 1;
+  let b = 2;
+  [a,b] = [b,a];
+  console.log(a,b); //2,1
+}
+```
+
+* 数组解构赋值
+
+```JavaScript
+//先用一个变量接收函数运行的结果，再返回0,1位置
+{
+  function f(){
+    return [1,2];
+  }
+  let a,b;
+  [a,b] = f();
+  console.log(a,b);
+}
+{
+  function f() {
+    return [1,2,3,4,5];
+  }
+  let a,b,c;
+  [a,,,b]=f();
+  console.log(a,b); //1,4
+}
+{
+  function f() {
+    return [1,2,3,4,5];
+  }
+  let a,b,c;
+  [a,b...]=f();
+  console.log(a,b); //1,[2,3,4,5]
+}
+{
+  function f() {
+    return [1,2,3,4,5];
+  }
+  let a,b,c;
+  [a,,b...]=f();
+  console.log(a,b); //1,[3,4,5]
+}
+```
+
+* 对象解构赋值
+
+```JavaScript
+{
+  let o = {p:42,q:true};
+  let {p,q}=o;
+  console.log(p,q);
+}
+```
 ---
