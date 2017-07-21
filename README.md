@@ -8,6 +8,7 @@
 * [01-01](https://github.com/TYRMars/JSLearn-ES6#01-01) `Let、const命令`
 * [01-02](https://github.com/TYRMars/JSLearn-ES6#01-02) `解构解析`
 * [01-03](https://github.com/TYRMars/JSLearn-ES6#01-03) `正则扩展`
+* [01-04](https://github.com/TYRMars/JSLearn-ES6#01-04) ``
 
 ---
 
@@ -203,10 +204,63 @@ last();
 }
 ```
 
+```JavaScript
+{
+  let {a=10,b=5}={a:3};
+  console.log(a,b);
+}
+```
+
+```JavaScript
+{
+  let metaData={
+    title:'abc',
+    test:[{
+      title:'test',
+      desc:'description'
+    }]
+  }
+  let {title:esTitle,test:[{title:cnTitle}]}=metaData;
+  console.log(esTitle,cnTitle);
+}
+```
+
+## 01-03
+### 正则扩展
+* 正则新增特性
+
+| 构造函数的变化      | 正则方法的扩展    | U修饰符  |
+| --------------- |:-------------:| -----------:|
+| y修饰符   | s修饰符 | 。。。。  |
+
+```JavaScript
+{
+  //ES5
+  let regex = new RegExp('xyz','i');
+  let regex2 = new RegExp(/xyz/i);
+  console.log(regex.test('xyz123'),regex2.test('xyz123'));//true true
+  //ES6
+  let regex3 = new RegExp(/xyz/ig,'i');
+  console.log(regex3.flags);//i flags获取对象修饰符的属性
+}
+```
+
+```JavaScript
+{
+  let s = 'bbb_bb_b';
+  let a1=/b+/g;
+  let a2=/b+/y;
+  console.log('one',a1.exec(s),a2.exec(s));
+  console.log('two',a1.exec(s),a2.exec(s));
+  //g可以匹配到bb，y没有匹配成功，g修饰符是从上一次匹配的位置继续寻找，y匹配了第一个紧跟着下一个字符必须还能匹配到
+}
+```
+
+
 ---
 
 
-#### JS作用域
+## JS作用域
 ```JavaScript
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
@@ -280,5 +334,6 @@ setTimeout(() => {
         })
       },1000)
 ```
+
 
 ---
