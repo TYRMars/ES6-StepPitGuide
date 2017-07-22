@@ -15,4 +15,13 @@
   console.log('one',a1.exec(s),a2.exec(s));
   console.log('two',a1.exec(s),a2.exec(s));
   //g可以匹配到bb，y没有匹配成功，g修饰符是从上一次匹配的位置继续寻找，y匹配了第一个紧跟着下一个字符必须还能匹配到
+  console.log(a1.sticky,a2.sticky);
+}
+
+{
+  console.log('u-1',/^\uD83D/.test('\uD83D\uDC2A')); //true 没有u会当成两个字符
+  console.log('u-2',/^\uD83D/u.test('\uD83D\uDC2A'));//false u会当成1个字符
+
+  console.log(/\u{61}/.test('a')); //false
+  console.log(/\u{61}/u.test('a'));//true 如果不加u修饰符
 }
