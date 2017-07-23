@@ -3,7 +3,6 @@
 
 ---
 
-
 ## 目录
 * [01-01](https://github.com/TYRMars/JSLearn-ES6#01-01) `Let、const命令`
 * [01-02](https://github.com/TYRMars/JSLearn-ES6#01-02) `解构解析`
@@ -253,6 +252,27 @@ last();
   console.log('one',a1.exec(s),a2.exec(s));
   console.log('two',a1.exec(s),a2.exec(s));
   //g可以匹配到bb，y没有匹配成功，g修饰符是从上一次匹配的位置继续寻找，y匹配了第一个紧跟着下一个字符必须还能匹配到
+}
+```
+
+```JavaScript
+{
+  console.log('u-1',/^\uD83D/.test('\uD83D\uDC2A')); //true 没有u会当成两个字符
+  console.log('u-2',/^\uD83D/u.test('\uD83D\uDC2A'));//false u会当成1个字符
+
+  console.log(/\u{61}/.test('a')); //false
+  console.log(/\u{61}/u.test('a'));//true 如果不加u修饰符
+
+  console.log('\u{20BB7}');
+
+  let s = '𠮷';
+
+  console.log('u',/^.$/.test(s));    //false
+  console.log('u-2',/^.$/u.test(s)); //true (如果字符串中有的字符大于两个字节，一定要加上U字符)使用.
+
+  console.log('test',/𠮷{2}/.test('𠮷𠮷'));   //false
+  console.log('test-2',/𠮷{2}/u.test('𠮷𠮷'));//true
+
 }
 ```
 

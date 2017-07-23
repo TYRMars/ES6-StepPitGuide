@@ -24,4 +24,15 @@
 
   console.log(/\u{61}/.test('a')); //false
   console.log(/\u{61}/u.test('a'));//true 如果不加u修饰符
+
+  console.log('\u{20BB7}');
+
+  let s = '𠮷';
+
+  console.log('u',/^.$/.test(s));    //false
+  console.log('u-2',/^.$/u.test(s)); //true (如果字符串中有的字符大于两个字节，一定要加上U字符)使用.
+
+  console.log('test',/𠮷{2}/.test('𠮷𠮷'));   //false
+  console.log('test-2',/𠮷{2}/u.test('𠮷𠮷'));//true
+
 }
