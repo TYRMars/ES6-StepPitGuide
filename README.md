@@ -7,7 +7,10 @@
 * [01-01](https://github.com/TYRMars/JSLearn-ES6#01-01) `Let、const命令`
 * [01-02](https://github.com/TYRMars/JSLearn-ES6#01-02) `解构解析`
 * [01-03](https://github.com/TYRMars/JSLearn-ES6#01-03) `正则扩展`
-* [01-04](https://github.com/TYRMars/JSLearn-ES6#01-04) ``
+* [01-04](https://github.com/TYRMars/JSLearn-ES6#01-04) `字符串扩展`
+
+## need
+* `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
 
 ---
 
@@ -228,7 +231,7 @@ last();
 ### 正则扩展
 * 正则新增特性
 
-| 构造函数的变化      | 正则方法的扩展    | U修饰符  |
+| 构造函数的变化      | 正则方法的扩展    | u修饰符  |
 | --------------- |:-------------:| -----------:|
 | y修饰符   | s修饰符 | 。。。。  |
 
@@ -244,6 +247,8 @@ last();
 }
 ```
 
+* y修饰符
+
 ```JavaScript
 {
   let s = 'bbb_bb_b';
@@ -254,6 +259,8 @@ last();
   //g可以匹配到bb，y没有匹配成功，g修饰符是从上一次匹配的位置继续寻找，y匹配了第一个紧跟着下一个字符必须还能匹配到
 }
 ```
+
+* U修饰符
 
 ```JavaScript
 {
@@ -276,6 +283,53 @@ last();
 }
 ```
 
+* s修饰符的作用
+
+## 01-04
+### 字符串扩展
+* 字符串新增特性
+
+| Unicode表示法 | 遍历接口    |
+| --------------- |:-------------:|
+| 模版字符串 | 新增方法（10种） |
+
+* `npm install babel-polyfill --save-dev`
+
+#### codePointAt
+```JavaScript
+
+//ES5
+{
+  let s='𠮷';
+  console.log('𠮷',s.length);   //𠮷 2
+  console.log('0',s.charAt(0)); //0 � 乱码
+  console.log('1',s.charAt(1)); //1 �
+  console.log('at0',s.charCodeAt(0)); //at0 55362
+  console.log('at1',s.charCodeAt(1)); //at1 57271
+}
+
+//ES6
+{
+  let s='𠮷a';
+  console.log('length',s.length);  //𠮷a 3
+  console.log('code0',s.codePointAt(0)); //code0 134071
+  console.log('code0',s.codePointAt(0).toString(16)); //code0 20bb7
+  console.log('code0',s.codePointAt(1)); //57271
+  console.log('code0',s.codePointAt(2)); //97
+}
+
+```
+
+#### fromCharPoint
+* 对比`ES5`中`fromCharCode`和`ES6`中`fromCodePoint`的用法
+* 识别大于两个字符的Unicode字符码
+
+```JavaScript
+{
+  console.log(String.fromCharCode("0x20bb7")); //ஷ 乱码
+  console.log(String.fromCodePoint("0x20bb7"));//𠮷
+}
+```
 
 ---
 

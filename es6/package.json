@@ -7,5 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JonathanZhang",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-polyfill": "^6.23.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-if": "^2.0.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^3.3.0",
+    "webpack-stream": "^3.2.0",
+    "yargs": "^8.0.2"
+  }
 }
