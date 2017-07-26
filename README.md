@@ -8,6 +8,7 @@
 * [01-02](https://github.com/TYRMars/JSLearn-ES6#01-02) `解构解析`
 * [01-03](https://github.com/TYRMars/JSLearn-ES6#01-03) `正则扩展`
 * [01-04](https://github.com/TYRMars/JSLearn-ES6#01-04) `字符串扩展`
+* [01-05](https://github.com/TYRMars/JSLearn-ES6#01-05) `数值扩展`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -420,10 +421,99 @@ last();
 }
 ```
 
+## 01-05
+### 数值扩展
+* 数值处理新增特性
+1. 新增方法
+2. 方法调整
+#### 知识点
+* 进制转换
+
+```JavaScript
+//ES5中二进制的表示方法
+{
+  console.log('b',0b111110111);
+  console.log('B',0B111110111);
+  console.log(0o767); //503
+}
+```
+
+* `Number.isFinite` 判断值是否有尽
+
+```JavaScript
+{
+  console.log('15',Number.isFinite(15)); //true
+  console.log('NaN',Number.isFinite(NaN));//false
+  console.log('1/0',Number.isFinite('true'/0));//false
+}
+```
+
+* 判断不是数
+
+```JavaScript
+{
+  console.log('NaN',Number.isNaN(NaN));//true
+  console.log('0',Number.isNaN(0));//false
+}
+```
+
+* 判断是不是整数
+
+```JavaScript
+{
+  console.log('25',Number.isInteger(25)); //true
+  console.log('25.0',Number.isInteger(25.0)); //true
+  console.log('25.1',Number.isInteger(25.1)); //false
+  console.log('25',Number.isInteger('25')); //接受参数必须是一个数
+}
+```
+
+* 判断一个数（-2的53次方到2的53次方）之间，不包含端点
+
+```JavaScript
+{
+  console.log(Number.MAX_SAFE_INTEGER);//常量，表示数的最大上限9007199254740991
+  console.log(Number.MIN_SAFE_INTEGER);//常量，表示数的最低下限-9007199254740991
+  console.log(Number.isSafeInteger(10));//true
+  console.log(Number.isSafeInteger('a'));//false
+}
+```
+
+* 判断小数部分，并返回整数部分
+
+```JavaScript
+{
+  console.log('4.1',Math.trunc(4.1)); //4
+  console.log('4.1',Math.trunc(4.9)); //4
+}
+```
+
+* 判断是正数负数还是0
+
+```JavaScript
+{
+  console.log('-5',Math.sign(-5)); //-1
+  console.log('0',Math.sign(0)); //0
+  console.log('5',Math.sign(5)); //1
+  console.log('50',Math.sign('50')); //1
+  console.log('foo',Math.sign('foo'));//NaN
+}
+```
+
+* 得出一个数的立方根
+
+```JavaScript
+{
+  console.log('-1',Math.cbrt(-1)); //-1
+  console.log('8',Math.cbrt(8)); //2
+}
+```
+
 ---
 
+## 扩展知识
 
-## JS作用域
+### JS作用域
 ```JavaScript
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
