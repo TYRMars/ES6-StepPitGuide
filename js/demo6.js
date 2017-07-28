@@ -25,7 +25,7 @@
 //keys
 {
   for(let index of ['1','c','ks'].keys()){
-    console.log('key',index);
+    console.log('key',index);//k0 k1 k2
   }
   for(let value of ['1','c','ks'].values()){
     console.log('values',value);
@@ -33,4 +33,17 @@
   for(let [index,value] of ['1','c','ks'].entries()){
     console.log('values',index,value);
   }
+}
+//copyWithin
+{
+  console.log([1,2,3,4,5].copyWithin(0,3,4)); //[4, 2, 3, 4, 5]
+}
+//findIndex
+{
+  console.log([1,2,3,4,5,6].find(function(item){return item>3}));//4
+  console.log([1,2,3,4,5,6].findIndex(function(item){return item>3}));//3
+}
+
+{
+  console.log('number',[1,2,NaN].includes(1));//number true
 }

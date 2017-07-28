@@ -9,7 +9,8 @@
 * [01-03](https://github.com/TYRMars/JSLearn-ES6#01-03) `正则扩展`
 * [01-04](https://github.com/TYRMars/JSLearn-ES6#01-04) `字符串扩展`
 * [01-05](https://github.com/TYRMars/JSLearn-ES6#01-05) `数值扩展`
-* [01-06](https://github.com/TYRMars/JSLearn-ES6#01-05) `数组扩展`
+* [01-06](https://github.com/TYRMars/JSLearn-ES6#01-06) `数组扩展`
+* [01-07](https://github.com/TYRMars/JSLearn-ES6#01-07) `函数扩展`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -571,6 +572,121 @@ last();
   for(let [index,value] of ['1','c','ks'].entries()){
     console.log('values',index,value);
   }
+}
+```
+
+* copyWithin
+
+```JavaScript
+//copyWithin
+{
+  console.log([1,2,3,4,5].copyWithin(0,3,4)); //[4, 2, 3, 4, 5]
+}
+```
+
+* findIndex
+
+```JavaScript
+//findIndex
+{
+  console.log([1,2,3,4,5,6].find(function(item){return item>3}));//4
+  console.log([1,2,3,4,5,6].findIndex(function(item){return item>3}));//3
+}
+```
+
+* includes
+
+```JavaScript
+{
+  console.log('number',[1,2,NaN].includes(1));//number true
+}
+```
+
+## 01-07
+### 函数扩展
+* 函数新增特性
+
+| 参数默认值 | rest参数 | 扩展运算符  |
+| --------------- |:-------------:| -----------:|
+| 箭头函数 | this绑定 | 尾调用 |
+
+#### 默认值
+* 需注意⚠️，在有默认值的参数后，所有参数都必须有默认值
+
+```JavaScript
+//参数默认值
+{
+  function test(x,y = 'world') {
+    console.log('默认值',x,y);
+  }
+  test('hello'); //默认值 hello world
+  test('hello','kill');
+}
+```
+
+* 需注意⚠️作用域问题
+
+```JavaScript
+//作用域问题
+{
+  let x ='test';
+  function test2(x,y=x){
+    console.log('作用域',x,y);
+  }
+  test2('kill'); //作用域 kill kill
+}
+{
+  let x ='test';
+  function test2(c,y=x){
+    console.log('作用域',c,y);
+  }
+  test2('kill'); //作用域 kill test
+}
+```
+
+#### rest参数
+
+```JavaScript
+//rest参数
+{
+  function test3(...arg){
+    for (let v of arg) {
+      console.log('rest',v);
+    }
+  }
+  test3(1,2,3,4,'a');//rest 1 rest 2 rest 3 rest 4 rest a
+}
+
+{
+  console.log(...[1,2,4]);//1,2,4
+  console.log('a',...[1,2,4]);//1,2,4
+}
+```
+
+#### =>函数
+* `let arrow = v => v*2;`
+* `v`是参数，=>，`V*2`返回值
+* 需要注意的箭头函数的`this`绑定
+```JavaScript
+{
+  let arrow = v => v*2;
+  let arrow2 = () => 5;
+  console.log(arrow(3));//6
+  console.log(arrow2());//5
+}
+```
+
+#### 尾调用
+* 嵌套别的函数，一个函数依赖另一个函数，建议使用尾调用，提升性能
+```JavaScript
+{
+  function tail(x) {
+    console.log('tail',x);
+  }
+  function fx(x){
+      return tail(x);
+  }
+  fx(123);
 }
 ```
 
