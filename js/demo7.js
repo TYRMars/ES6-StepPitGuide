@@ -50,5 +50,5 @@
   function fx(x){
       return tail(x);
   }
-  fx(123);
+  fx(123); //tail 123
 }
