@@ -2,6 +2,12 @@
 <p align="center"><img src="http://www.liuhaihua.cn/wp-content/uploads/2016/02/uuUFNjm.png" /></p>
 
 ---
+<p align="center"><img src="https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=ae60bcbf7acf3bc7e800caeae93bdd9c/bf096b63f6246b60c55af2c6e1f81a4c510fa228.jpg" /></p>
+
+<p align="center">强烈推荐此书《深入理解ES6》</p>
+<p align="center">红宝书大神【美】Nicholas C. Zakas（尼古拉斯·泽卡斯）最新力作</p>
+
+---
 
 ## 目录
 * [01-01](https://github.com/TYRMars/JSLearn-ES6#01-01) `Let、const命令`
@@ -11,6 +17,7 @@
 * [01-05](https://github.com/TYRMars/JSLearn-ES6#01-05) `数值扩展`
 * [01-06](https://github.com/TYRMars/JSLearn-ES6#01-06) `数组扩展`
 * [01-07](https://github.com/TYRMars/JSLearn-ES6#01-07) `函数扩展`
+* [01-08](https://github.com/TYRMars/JSLearn-ES6#01-08) `对象扩展`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -686,9 +693,113 @@ last();
   function fx(x){
       return tail(x);
   }
-  fx(123);
+  fx(123);//tail 123
 }
 ```
+
+## 01-08
+### 对象扩展
+* 对象新增特性`Object`
+
+| 简洁表示法 | 属性表示法 |
+| --------------- |:-------------:|
+| 扩展运算符 | Object新增方法 |
+
+#### 简洁表示法
+
+```JavaScript
+{
+  //简洁表示法
+  let o=1;
+  let k=2;
+  let es5={
+    o:o,
+    k:k
+  };
+  let es6={
+    o,
+    k
+  };
+  console.log(es5,es6);//{o: 1, k: 2} {o: 1, k: 2}
+
+  let es5_method = {
+    hello:function () {
+      console.log('hello');
+    }
+  };
+  let es6_method = {
+    hello(){
+      console.log('hello');
+    }
+  }
+  console.log(es5_method,es6_method);//{hello: ƒ} {hello: ƒ}
+}
+```
+
+#### 属性表达式
+
+```JavaScript
+{
+  let a = 'b';
+  let es5_obj = {
+    a:'c',
+    b:'c'
+  };
+  let es6_obj = {
+    [a]:'c'
+  };
+
+  console.log(es5_obj,es6_obj);//{a: "c", b: "c"} {b: "c"}
+}
+```
+
+#### 新增API
+
+* `Object.is()`
+
+1. 虽然两个是空数组，但是两个数组地址不同，所以为false
+2. `Object.is()` 和 `===` 用法一样
+
+```JavaScript
+{
+  console.log('字符串',Object.is('abc','abc'),'abc'==='abc'); //字符串 true true
+  console.log('数组',Object.is([],[]),[]===[]);//数组 false false
+  //虽然两个是空数组，但是两个数组地址不同，所以为false
+  //Object.is() 和 === 用法一样
+}
+```
+
+* `Object.assign()`
+
+1. 拷贝属性有限制，分为浅复制和深复制。引用类型只是修改引用地址，而不是拷贝所有的值
+2. 这个方法拷贝的是只有自身对象的属性，如果对象有继承，那它不会拷贝继承属性。同时也不能拷贝对象中不可枚举的属性
+
+```JavaScript
+console.log('拷贝',Object.assign({a:'a'},{b:'b'}));//浅拷贝
+```
+
+* `Object.entries()`
+
+```JavaScript
+let test = {k:123,o:456};
+for (let [key,value] of Object.entries(test)) {
+  console.log([key,value]); // ["k", 123] ["o", 456]
+}
+```
+
+* ES2017提案
+
+```JavaScript
+{
+  //扩展运算符
+  let {a,b,...c}={a:'test',b:'kill',c:'ddd',d:'ccc'};
+  c = {
+    c:'ddd',
+    d:'ccc'
+  }
+}
+```
+
 
 ---
 
