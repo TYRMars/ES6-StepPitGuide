@@ -19,6 +19,7 @@
 * [01-07](https://github.com/TYRMars/JSLearn-ES6#01-07) `函数扩展`
 * [01-08](https://github.com/TYRMars/JSLearn-ES6#01-08) `对象扩展`
 * [01-09](https://github.com/TYRMars/JSLearn-ES6#01-09) `Symbol`
+* [01-10](https://github.com/TYRMars/JSLearn-ES6#01-09) `数据结构`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -851,6 +852,24 @@ for (let [key,value] of Object.entries(test)) {
 
 ```
 
+## 01-10
+### 数据结构
+
+| Set的用法 | WeakSet的用法 |
+| --------------- |:-------------:|
+| Map的用法 | WeakMap的用法 |
+
+#### Set
+
+* Set可以当成数组去用，但是区别在于Set集合当中的元素是不能重复的
+
+#### WeakSet
+
+#### Map
+
+* Map可以和Object做对比，Object的k value值一定是字符串。Map中k可以是任意入局类型
+
+#### WeakMap
 
 
 ---
