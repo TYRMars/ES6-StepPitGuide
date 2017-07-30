@@ -18,6 +18,7 @@
 * [01-06](https://github.com/TYRMars/JSLearn-ES6#01-06) `数组扩展`
 * [01-07](https://github.com/TYRMars/JSLearn-ES6#01-07) `函数扩展`
 * [01-08](https://github.com/TYRMars/JSLearn-ES6#01-08) `对象扩展`
+* [01-09](https://github.com/TYRMars/JSLearn-ES6#01-09) `Symbol`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -799,6 +800,57 @@ for (let [key,value] of Object.entries(test)) {
   }
 }
 ```
+
+## 01-09
+### Symbol
+
+* `Symbol`的概念
+  * 这种数据类型提供独一无二的值，如：在JS中声明数据类型`number = 5` ，还可以通过一个`变量b`生成一个`number = 5`。但是用Symbol的值生成的值`不重复不相等`，用`Symbol`生成一个`变量a`和用`Symbol`生成的`变量b`都不相等
+
+* `Symbol`的作用
+  * 特性
+
+* `Symbol`的声明
+
+```JavaScript
+{
+  //声明
+  let a1=Symbol();
+  let a2=Symbol();
+  console.log(a1===a2);//false
+  let a3=Symbol.for('a3');
+  let a4=Symbol.for('a3');
+  console.log(a3===a4);//true
+}
+```
+
+* 获取`Symbol`属性值的方法
+```JavaScript
+{
+  let a1=Symbol.for('abc');
+  let obj = {
+    [a1]:'123',
+    'abc':345,
+    'c':456
+  }
+  console.log('obj',obj);//{abc: 345, c: 456, Symbol(abc): "123"}
+
+  for (let [key,value] of Object.entries(obj)) {
+    console.log('let of',key,value);//let of abc 345 let of c 456
+  }
+
+  //Object.getOwnPropertySymbols(obj)
+  Object.getOwnPropertySymbols(obj).forEach(function (item) {
+    console.log(obj[item]);// 123
+  })
+
+  Reflect.ownKeys(obj).forEach(function (item) {
+    console.log('1',obj[item]);// 345 456 123
+  })
+}
+
+```
+
 
 
 ---
