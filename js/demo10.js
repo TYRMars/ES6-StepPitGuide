@@ -66,3 +66,40 @@
     console.log(item);
   })
 }
+
+{
+  let weaklist = new WeakSet();
+  let args = {};
+  weaklist.add(args);
+  //weaklist.add(2); error
+  console.log('weaklist',weaklist); //WeakSet {Object {}}
+}
+
+{
+  let map = new Map();
+  let arr = ['123'];
+
+  map.set(arr,456);
+
+  console.log('map',map,map.get(arr));//map Map(1) {["123"] => 456} 456
+}
+
+{
+  let map = new Map([['a',123],['b',456]]);
+  console.log('map args',map);//map args Map(2) {"a" => 123, "b" => 456}
+}
+
+{
+  let map = new Map([['a',123],['b',456]]);
+  console.log('size',map.size);//size 2
+  console.log('delete',map.delete('a'),map);//delete true Map(1) {"b" => 456}
+  console.log('clear',map.clear(),map);//Map(0) {}
+}
+
+{
+  let weakmap = new WeakMap();//接收的K值必须是对象
+
+  let o = {};
+  weakmap.set(o,123);
+  console.log(weakmap.get(o));
+}

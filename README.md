@@ -954,12 +954,74 @@ for (let [key,value] of Object.entries(test)) {
 
 #### WeakSet
 
+* WeakSet与Set支持的数据类型不一样，只能是对象，不能是其他的数据类型
+* WeakSet是弱引用，无法进行垃圾回收
+    * 没有size属性
+    * 没有clear方法
+    * 无法遍历
+
+```JavaScript
+{
+  let weaklist = new WeakSet();
+  let args = {};
+  weaklist.add(args);
+  //weaklist.add(2); error
+  console.log('weaklist',weaklist); //WeakSet {Object {}}
+}
+```
+
 #### Map
 
-* Map可以和Object做对比，Object的k value值一定是字符串。Map中k可以是任意入局类型
+* Map可以和Object做对比，Object的k value值一定是字符串。
+* Map中k可以是任意数据类型
+
+* Map的定义,与Set采用add不同，Map采用set添加
+
+```JavaScript
+{
+  let map = new Map();
+  let arr = ['123'];
+
+  map.set(arr,456);
+
+  console.log('map',map,map.get(arr));//map Map(1) {["123"] => 456} 456
+}
+```
+
+```JavaScript
+{
+  let map = new Map([['a',123],['b',456]]);
+  console.log('map args',map);//map args Map(2) {"a" => 123, "b" => 456}
+}
+```
+
+* Map的size,delete,clear的使用
+
+```JavaScript
+{
+  let map = new Map([['a',123],['b',456]]);
+  console.log('size',map.size);//size 2
+  console.log('delete',map.delete('a'),map);//delete true Map(1) {"b" => 456}
+  console.log('clear',map.clear(),map);//Map(0) {}
+}
+```
+
 
 #### WeakMap
 
+* 接收的K值必须是对象
+* 没有size属性，无法使用clear
+* 也无法遍历
+
+```JavaScript
+{
+  let weakmap = new WeakMap();//接收的K值必须是对象
+
+  let o = {};
+  weakmap.set(o,123);
+  console.log(weakmap.get(o));//123
+}
+```
 
 ---
 
