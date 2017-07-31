@@ -19,7 +19,7 @@
 * [01-07](https://github.com/TYRMars/JSLearn-ES6#01-07) `函数扩展`
 * [01-08](https://github.com/TYRMars/JSLearn-ES6#01-08) `对象扩展`
 * [01-09](https://github.com/TYRMars/JSLearn-ES6#01-09) `Symbol`
-* [01-10](https://github.com/TYRMars/JSLearn-ES6#01-09) `数据结构`
+* [01-10](https://github.com/TYRMars/JSLearn-ES6#01-10) `数据结构`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -861,12 +861,7 @@ for (let [key,value] of Object.entries(test)) {
 
 #### Set
 
-* Set可以当成数组去用，但是区别在于Set集合当中的元素是不能重复的
-
-```JavaScript
-
-```
-
+* `Set`可以当成数组去用，但是区别在于`Set`集合当中的元素是不能重复的
 * add
 
 ```JavaScript
@@ -879,7 +874,7 @@ for (let [key,value] of Object.entries(test)) {
 }
 ```
 
-* Set可以检测数组中的不重复元素个数
+* `Set`可以检测数组中的不重复元素个数
 
 ```JavaScript
 {
@@ -913,7 +908,7 @@ for (let [key,value] of Object.entries(test)) {
 }
 ```
 
-* add,delete,clear,has
+* `add,delete,clear,has`
 
 ```JavaScript
 {
@@ -927,7 +922,7 @@ for (let [key,value] of Object.entries(test)) {
 }
 ```
 
-* Set遍历
+* `Set`遍历
 
 ```JavaScript
 //set 遍历
