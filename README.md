@@ -5,7 +5,7 @@
 <p align="center"><img src="https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=ae60bcbf7acf3bc7e800caeae93bdd9c/bf096b63f6246b60c55af2c6e1f81a4c510fa228.jpg" /></p>
 
 <p align="center">强烈推荐此书《深入理解ES6》</p>
-<p align="center">红宝书大神【美】Nicholas C. Zakas（尼古拉斯·泽卡斯）最新力作</p>
+<p align="center">红宝书大神【美】Nicholas C. Zakas（尼古拉斯·泽卡斯）最新力作 </p>
 
 ---
 
@@ -20,6 +20,7 @@
 * [01-08](https://github.com/TYRMars/JSLearn-ES6#01-08) `对象扩展`
 * [01-09](https://github.com/TYRMars/JSLearn-ES6#01-09) `Symbol`
 * [01-10](https://github.com/TYRMars/JSLearn-ES6#01-10) `数据结构`
+* [01-11](https://github.com/TYRMars/JSLearn-ES6#01-11) `数据结构对比`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -1020,6 +1021,76 @@ for (let [key,value] of Object.entries(test)) {
   let o = {};
   weakmap.set(o,123);
   console.log(weakmap.get(o));//123
+}
+```
+
+## 01-11
+### 数据结构对比
+* Map与Array的对比
+* Set与Array的对比
+
+#### Map与Array的对比
+* 增删改查
+
+```JavaScript
+{
+  //数据解构横向对比，增，删，改，查
+  let map = new Map();
+  let array = [];
+  //增
+  map.set('t',1);
+  array.push({t:1});
+
+  console.log('map-array',map,array);//Map(1) {"t" => 1}
+
+  //查 map为布尔值，array为返回那个对象的值
+  let map_exist = map.has('t');
+  let array_exist = array.find(item=>item.t);
+  console.info('map-array',map_exist,array_exist);//true Object {t: 1}
+
+  //改
+  map.set('t',2);
+  array.forEach(item=>item.t?item.t=2:'');
+  console.info('map-array',map,array);//Map(1) {"t" => 2}
+
+  //删
+  map.delete('t');
+  let index = array.findIndex(item=>item.t);
+  array.splice(index,1);
+  console.log('map-array',map,array);//Map(0) {} []
+}
+```
+
+#### Set与Array的对比
+* 增删改查
+
+```JavaScript
+{
+  //set 和 array对比
+  let set = new Set();
+  let array=[];
+
+  //增
+  set.add({'t':1});
+  array.push({t:1});
+
+  console.info('set-array',set,array);//Set(1)
+
+  //查
+  let set_exist = set.has({t:1});
+  let array_exist = array.find(item=>item.t);
+  console.log('set-array',set_exist,array_exist);//false Object {t: 1}
+
+  //改 set 也需要用foreach
+  set.forEach(item=>item.t?item.t=2:'');
+  array.forEach(item=>item.t?item.t=2:'');
+  console.log('set-array',set,array);//{Object {t: 2}}
+
+  //删
+  set.forEach(item=>item.t?set.delete(item):'');
+  let index = array.findIndex(item=>item.t);
+  array.splice(index,1);
+  console.log('set-array-empty',set,array);//Set(0) []
 }
 ```
 

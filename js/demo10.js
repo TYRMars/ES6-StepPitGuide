@@ -103,3 +103,58 @@
   weakmap.set(o,123);
   console.log(weakmap.get(o));
 }
+
+{
+  //数据解构横向对比，增，删，改，查
+  let map = new Map();
+  let array = [];
+  //增
+  map.set('t',1);
+  array.push({t:1});
+
+  console.log('map-array',map,array);//Map(1) {"t" => 1}
+
+  //查 map为布尔值，array为返回那个对象的值
+  let map_exist = map.has('t');
+  let array_exist = array.find(item=>item.t);
+  console.info('map-array',map_exist,array_exist);//true Object {t: 1}
+
+  //改
+  map.set('t',2);
+  array.forEach(item=>item.t?item.t=2:'');
+  console.info('map-array',map,array);//Map(1) {"t" => 2}
+
+  //删
+  map.delete('t');
+  let index = array.findIndex(item=>item.t);
+  array.splice(index,1);
+  console.log('map-array',map,array);//Map(0) {} []
+}
+
+{
+  //set 和 array对比
+  let set = new Set();
+  let array=[];
+
+  //增
+  set.add({'t':1});
+  array.push({t:1});
+
+  console.info('set-array',set,array);//Set(1)
+
+  //查
+  let set_exist = set.has({t:1});
+  let array_exist = array.find(item=>item.t);
+  console.log('set-array',set_exist,array_exist);//false Object {t: 1}
+
+  //改 set 也需要用foreach
+  set.forEach(item=>item.t?item.t=2:'');
+  array.forEach(item=>item.t?item.t=2:'');
+  console.log('set-array',set,array);//{Object {t: 2}}
+
+  //删
+  set.forEach(item=>item.t?set.delete(item):'');
+  let index = array.findIndex(item=>item.t);
+  array.splice(index,1);
+  console.log('set-array-empty',set,array);//Set(0) []
+}
