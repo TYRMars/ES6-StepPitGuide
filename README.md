@@ -22,6 +22,7 @@
 * [01-10](https://github.com/TYRMars/JSLearn-ES6#01-10) `数据结构`
 * [01-11](https://github.com/TYRMars/JSLearn-ES6#01-11) `数据结构对比`
 * [01-12](https://github.com/TYRMars/JSLearn-ES6#01-12) `类的概念`
+* [01-13](https://github.com/TYRMars/JSLearn-ES6#01-13) `Proxy和Reflect`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -1220,6 +1221,20 @@ for (let [key,value] of Object.entries(test)) {
   console.log('静态属性',Parent.type);//静态属性 test
 }
 ```
+
+## 01-13
+### Proxy和Reflect
+
+* Proxy和Reflect的概念
+* Proxy和Reflect的适用场景
+
+#### Proxy
+* 代理
+* 可以理解为供应商、代理商、用户，Proxy中间起作用🔗连接了用户和真是对象中的一个层
+
+#### Reflect
+* 反射
+* 反射，反射的是Object
 
 ---
 
