@@ -9,6 +9,11 @@
 
 ---
 
+#### [hyy1115／ES6-learning](https://github.com/hyy1115/ES6-learning) `实际应用请看前端大神对该书的读后感`
+* `以下内容为前端小白的我对于ES6粗浅的理解认识，如有错误请多多包涵。可以直接提交issue来告诉我，来帮助其他人学习`
+
+---
+
 ## 目录
 * [01-01](https://github.com/TYRMars/JSLearn-ES6#01-01) `Let、const命令`
 * [01-02](https://github.com/TYRMars/JSLearn-ES6#01-02) `解构解析`
