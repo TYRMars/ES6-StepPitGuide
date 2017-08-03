@@ -158,3 +158,37 @@
   array.splice(index,1);
   console.log('set-array-empty',set,array);//Set(0) []
 }
+
+{
+  //map,set,object对比
+  let item = {t:1};
+  let map = new Map();
+  let set = new Set();
+  let obj = {};
+
+  //增
+  map.set('t',1);
+  set.add(item);
+  obj['t'] = 1;
+
+  console.log('map-set-obj',obj,map,set);// map-set-obj {t: 1} Map(1) {"t" => 1} Set(1) {{…}}
+
+  //查
+  console.log({
+    map_exist:map.has('t'),
+    set_exist:set.has(item),
+    obj_exist:'t' in obj
+  });//{map_exist: true, set_exist: true, obj_exist: true}
+
+  //改
+  map.set("t",2);
+  item.t = 2;
+  obj['t'] = 2;
+  console.log('map-set-obj',obj,map,set);
+
+  //删除
+  map.delete('t');
+  set.delete(item);
+  delete obj['t']
+  console.log('map-set-obj-empty',obj,map,set);//map-set-obj-empty {} Map(0) {} Set(0) {}
+}

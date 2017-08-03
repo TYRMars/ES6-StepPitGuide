@@ -1101,6 +1101,45 @@ for (let [key,value] of Object.entries(test)) {
 }
 ```
 
+* 保证数据的唯一性还是推荐用set，使用的时候
+
+#### map,set,object对比
+```JavaScript
+{
+  //map,set,object对比
+  let item = {t:1};
+  let map = new Map();
+  let set = new Set();
+  let obj = {};
+
+  //增
+  map.set('t',1);
+  set.add(item);
+  obj['t'] = 1;
+
+  console.log('map-set-obj',obj,map,set);// map-set-obj {t: 1} Map(1) {"t" => 1} Set(1) {{…}}
+
+  //查
+  console.log({
+    map_exist:map.has('t'),
+    set_exist:set.has(item),
+    obj_exist:'t' in obj
+  });//{map_exist: true, set_exist: true, obj_exist: true}
+
+  //改
+  map.set("t",2);
+  item.t = 2;
+  obj['t'] = 2;
+  console.log('map-set-obj',obj,map,set);
+
+  //删除
+  map.delete('t');
+  set.delete(item);
+  delete obj['t']
+  console.log('map-set-obj-empty',obj,map,set);//map-set-obj-empty {} Map(0) {} Set(0) {}
+}
+```
+
 ## 01-12
 ### 类的概念
 
@@ -1303,6 +1342,79 @@ for (let [key,value] of Object.entries(test)) {
 #### Reflect
 * 反射
 * 反射，反射的是Object
+* 用法和Proxy也不同，Reflect采用直接调用
+
+```JavaScript
+{
+  let obj = {
+    time:'2017-03-11',
+    name:'net',
+    _r:123
+  };
+
+  console.log('Reflect-get',Reflect.get(obj,'time'));//Reflect-get 2017-03-11
+  console.log('Reflect-set',Reflect.set(obj,'name','zhangjianan'));//Reflect-set true
+  console.log('has',Reflect.has(obj,'name'));//has true
+}
+```
+#### 注意-事件代理实例
+* 改变原有的直接对obj操作的习惯，采用Proxy和Reflect对obj操作更加安全
+
+* 这个构造函数返回的是一个Proxy对象（作为对target代理），由personValidators设置了限制规则。
+* 这样程序有了很强的健壮性和复用性
+
+```JavaScript
+{
+  function validator(target,validator) {
+    return new Proxy(target,{
+      _validator:validator,
+      set(target,key,value,proxy){
+        if (target.hasOwnProperty(key)) {
+          let va = this._validator[key];
+          if (!!va(value)) {
+            return Reflect.set(target,key,value,proxy);
+          }else {
+            throw Error(`不能设置${key}到${value}`);
+          }
+        }else {
+          throw Error(`${keys} 不存在`);
+        }
+      }
+    })
+  }
+
+  //参数更改
+  const personValidators={
+    name(val){
+      return typeof val === 'string'
+    },
+    age(val){
+      return typeof val === 'number' && val>18
+    },
+    //mobilnumber...很多的代理规则
+  }
+
+  //class
+  class Person{
+    constructor(name,age) {
+      this.name = name;
+      this.age = age;
+      return validator(this,personValidators);
+    }
+  }
+
+  const person = new Person('nan',21);
+
+  console.log(person);//Proxy {name: "nan", age: 21}
+
+  //因为代理对set做了限制，由personValidators设置了限制规则
+  //person.name = 48;//error
+  //console.log(person);//不能设置name到48
+  person.name = 'zhangjianan';
+  console.log(person);//Proxy {name: "zhangjianan", age: 21}
+}
+
+```
 
 ---
 
