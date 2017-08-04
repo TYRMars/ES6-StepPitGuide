@@ -1423,6 +1423,185 @@ for (let [key,value] of Object.entries(test)) {
 * Promise的作用
 * Promise的基本用法
 
+#### 来自MDN的一句话
+
+* Promise 对象用于一个异步操作的最终完成（或失败）及其结果值的表示。(简单点说就是处理异步请求。。我们经常会做些承诺，如果我赢了你就嫁给我，如果输了我就嫁给你之类的诺言。这就是promise的中文含义。一个诺言，一个成功，一个失败。
+
+![promises]('https://mdn.mozillademos.org/files/8633/promises.png')
+
+#### resolve()
+* 继续执行 [MDN-Promise.resolve()]('https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve')
+
+#### then()
+* then() 方法返回一个  Promise。它最多需要有两个参数：Promise的成功和失败情况的回调函数。
+
+#### race()
+* Promise.race(iterable) 方法返回一个新的 promise，参数iterable中只要有一个promise对象"完成（resolve）"或"失败（reject）"，新的promise就会立刻"完成（resolve）"或者"失败（reject）"，并获得之前那个promise对象的返回值或者错误原因
+
+#### 基本用法
+```JavaScript
+{
+  //基本定义
+  let ajax = function(callback){
+    console.log('执行');
+    setTimeout(function () {
+      callback&&callback.call();
+    }, 1000);
+  };
+  ajax(function(){
+    console.log('timeout1');
+  })
+}
+//执行
+//timeout1
+```
+
+* 执行顺序
+
+```JavaScript
+{
+  let ajax = function(){
+    console.log('执行2');
+    return new Promise(function(resolve,reject){
+      setTimeout(function () {
+        resolve()
+      }, 1000);
+    })
+  };
+
+  ajax().then(function(){
+    console.log('promise','timeout2');
+  })
+}
+// 执行2
+// Promise {[[PromiseStatus]]: "pending", [[PromiseValue]]: undefined}
+// promise timeout2
+
+{
+  let ajax = function(){
+    console.log('执行2');
+    return new Promise(function(resolve,reject){
+      setTimeout(function () {
+        resolve()
+      }, 1000);
+    })
+  };
+
+  ajax().then(function(){
+    return new Promise(function(resolve,reject) {
+      setTimeout(function functionName() {
+        resolve()
+      },2000)
+    })
+  }).then(function(){
+    console.log('timeout3');
+  })
+}
+//执行2
+//Promise {[[PromiseStatus]]: "pending", [[PromiseValue]]: undefined}
+//timeout3
+
+```
+
+* 错误监测
+
+```JavaScript
+{
+  let ajax =function(num) {
+    console.log('执行4');
+    return new Promise(function(resolve,reject) {
+      if (num>5) {
+        resolve()
+      }else {
+        throw new Error('出错啦')
+      }
+    })
+  }
+
+  ajax(6).then(function () {
+    console.log('log',6);
+  }).catch(function (err) {
+    console.log('catch',err);
+  })
+
+  ajax(3).then(function () {
+    console.log('log',3);
+  }).catch(function (err) {
+    console.log('catch',err);
+  })
+}
+//执行4
+//log 6
+
+// catch Error: 出错啦
+//     at <anonymous>:8:15
+//     at Promise (<anonymous>)
+//     at ajax (<anonymous>:4:12)
+//     at <anonymous>:19:3
+
+//Promise {[[PromiseStatus]]: "resolved", [[PromiseValue]]: undefined}
+```
+
+#### 场景事例
+
+1. 所有图片加载完再添加到页面
+
+```JavaScript
+{
+  //所有图片加载完再添加到页面
+  function loadImg(src) {
+    return new Promise((resolve,reject)=>{
+      let img = document.createElement('img');
+      img.src=src;
+      img.onload = function () {
+        resolve(img)
+      }
+      img.onerror = function (err) {
+        reject(err)
+      }
+    })
+  }
+
+  function showImgs(imgs) {
+    imgs.forEach(function (img) {
+      document.body.appendChild(img);
+    })
+  }
+
+  Promise.all([
+    loadImg(''),//png等图片
+  ]).then(showImgs)
+}
+```
+2. 哪个图片加载最快加载哪张
+
+```JavaScript
+{
+  //有一个图片加载完就添加到页面
+  function loadImg(src) {
+    return new Promise((resolve,reject)=>{
+      let img = document.createElement('img');
+      img.src=src;
+      img.onload = function () {
+        resolve(img)
+      }
+      img.onerror = function (err) {
+        reject(err)
+      }
+    })
+  }
+
+  function showImgs(img) {
+    let p = document.createElement('p');
+    p.appendChild(img);
+  }
+
+  Promise.race([
+    loadImg('');//
+  ]).then(showImgs)
+}
+```
+
 ---
 
 ## 扩展知识
