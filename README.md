@@ -28,6 +28,7 @@
 * [01-11](https://github.com/TYRMars/JSLearn-ES6#01-11) `数据结构对比`
 * [01-12](https://github.com/TYRMars/JSLearn-ES6#01-12) `类的概念`
 * [01-13](https://github.com/TYRMars/JSLearn-ES6#01-13) `Proxy和Reflect`
+* [01-14](https://github.com/TYRMars/JSLearn-ES6#01-14) `Promise`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -1415,6 +1416,12 @@ for (let [key,value] of Object.entries(test)) {
 }
 
 ```
+
+## 01-14
+### Promise
+* 什么是异步
+* Promise的作用
+* Promise的基本用法
 
 ---
 
