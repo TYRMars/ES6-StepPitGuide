@@ -29,6 +29,7 @@
 * [01-12](https://github.com/TYRMars/JSLearn-ES6#01-12) `类的概念`
 * [01-13](https://github.com/TYRMars/JSLearn-ES6#01-13) `Proxy和Reflect`
 * [01-14](https://github.com/TYRMars/JSLearn-ES6#01-14) `Promise`
+* [01-15](https://github.com/TYRMars/JSLearn-ES6#01-15) `模块化`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -1600,6 +1601,73 @@ for (let [key,value] of Object.entries(test)) {
     loadImg('');//
   ]).then(showImgs)
 }
+```
+
+## 模块化
+### 01-15
+* 基本概念
+* ES6的模块化语法
+* 之前JS就有模块化的欲望：如require.js
+
+#### 使用方法
+
+* 导出
+```JavaScript
+//导出
+export let A=123;
+
+export function test() {
+  console.log('test');
+}
+
+export class Hello{
+  test(){
+    console.log('class');
+  }
+}
+```
+
+* 导入
+```JavaScript
+import {A,test,Hello} from './class/lesson14';
+
+console.log(A,test,Hello);
+```
+
+* ?导出问题思考
+    * 如果要导入导出很多东西呢，难道{.......}全部写出来?
+
+```JavaScript
+import * as lesson from './class/lesson14'
+// * 代表导入所有
+// as(作为) lesson(一个别名) 存放在lesson下，调用的时候使用lesson.A等来使用
+```  
+
+* 另一种，default导入方式
+
+```JavaScript
+{
+  let A = 123;
+  let test = function () {
+    console.log('test');
+  }
+}
+class Hello {
+  test() {
+    console.log('class');
+  }
+}
+
+//不起名字，由引入方起名
+export default {
+  A,
+  test,
+  Hello
+}
+```
+
+```JavaScript
+import lesson14 from './class/lesson14'
 ```
 
 ---
