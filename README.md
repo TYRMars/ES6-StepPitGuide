@@ -31,6 +31,7 @@
 * [01-14](https://github.com/TYRMars/JSLearn-ES6#01-14) `Promise`
 * [01-15](https://github.com/TYRMars/JSLearn-ES6#01-15) `模块化`
 * [01-16](https://github.com/TYRMars/JSLearn-ES6#01-16) `lterator和for...of循环`
+* [01-17](https://github.com/TYRMars/JSLearn-ES6#01-17) `Generator`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -85,6 +86,7 @@ function last() {
 }
 last();
 ```
+
 * const作为常量的定义，常量的含义是无法修改的
     * 如果对PI进行修改PI会报错PI：read-only
     * 声明const必须进行赋值
@@ -101,7 +103,6 @@ function last() {
 last();
 ```
 * 当定义对象时（引用类型），`const`定义的对象存储的指针，指针无法改变，但是对象是可以改变的
-
 
 ## 01-02
 ### 解析解构
@@ -1730,6 +1731,131 @@ import lesson14 from './class/lesson14'
   let arr = ['hello','world'];
   for(let value of arr){
     console.log('value',value);
+  }
+}
+```
+
+## 01-17
+### Generator
+* 基本概念
+* next函数的用法
+* yield*的语法
+
+#### Generator基本定义
+* Generator
+* yield是Generator特有的
+* 返回lterator接口
+
+```JavaScript
+{
+  //Generator
+  let tell = function* () {
+    yield 'a';
+    yield 'b';
+    return 'c'
+  };
+
+  let k = tell();
+  console.log(k.next());
+  console.log(k.next());
+  console.log(k.next());
+  console.log(k.next());
+}
+```
+
+#### 作为遍历器的返回值
+```JavaScript
+{
+  let obj = {};
+  obj[Symbol.iterator] = function* () {
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+  for (let value of obj) {
+    console.log('value',value);//value 1 value 2 value 3
+  }
+}
+
+{
+  let state = function* () {
+    while (1) {
+      yield 'A';
+      yield 'B';
+      yield 'C';
+    }
+  }
+  let status = state();
+  console.log(status.next());//{value: "A", done: false}
+  console.log(status.next());//{value: "B", done: false}
+  console.log(status.next());//{value: "C", done: false}
+  console.log(status.next());//{value: "A", done: false}
+  console.log(status.next());//{value: "B", done: false}
+}
+```
+
+#### 事例
+* 抽奖
+```JavaScript
+{
+  let draw = function (count) {
+    //具体抽奖逻辑
+    console.info(`剩余${count}次`);
+  }
+
+  let reside = function* (count) {
+    while (count>0) {
+      count--;
+      yield draw(count);
+    }
+  }
+
+  let star = reside(5);
+  let btn = document.createElement('button');
+  btn.id = 'start';
+  btn.textContent ='抽奖';
+  document.body.appendChild(btn);
+  document.getElementById('start').addEventListener('click',function () {
+    star.next();
+  },false)
+  // 页面上会生成一个抽奖按钮
+  // 剩余4次
+  // 剩余3次
+  // 剩余2次
+  // 剩余1次
+  // 剩余0次
+}
+```
+
+* 长轮训与webstock
+    * 之前我们所使用的都是通过定时器制作
+```JavaScript
+{
+  {
+    // 长轮训
+    let ajax = function* () {
+      yield new Promise(function (resolve,reject) {
+        setTimeout(function () {
+          resolve({code:0});
+        },200);
+      })
+    }
+    // pull
+    let pull = function () {
+      let generator =ajax();
+      let step = generator.next();
+      step.value.then(function (d) {
+        if (d.code!=0) {
+          setTimeout(function () {
+            console.info('wait');
+            pull()
+          },1000)
+        }else {
+          console.info(d);
+        }
+      })
+    }
+    pull();//{code: 0}
   }
 }
 ```
