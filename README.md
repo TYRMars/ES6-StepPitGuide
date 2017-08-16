@@ -31,7 +31,8 @@
 * [01-14](https://github.com/TYRMars/JSLearn-ES6#01-14) `Promise`
 * [01-15](https://github.com/TYRMars/JSLearn-ES6#01-15) `模块化`
 * [01-16](https://github.com/TYRMars/JSLearn-ES6#01-16) `lterator和for...of循环`
-* [01-17](https://github.com/TYRMars/JSLearn-ES6#01-17) `Generator`
+* [01-17](https://github.com/TYRMars/JSLearn-ES6#01-17) `Generator迭代器`
+* [01-18](https://github.com/TYRMars/JSLearn-ES6#01-18) `Decorator修饰器`
 
 ## need
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
@@ -1860,6 +1861,12 @@ import lesson14 from './class/lesson14'
 }
 ```
 
+## 01-18
+### Decorator
+* 基本概念
+* 基本用法
+
+* 修饰器是一个函数用来修改类的行为
 ---
 
 ## 扩展知识
