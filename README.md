@@ -1431,7 +1431,7 @@ for (let [key,value] of Object.entries(test)) {
 
 * Promise 对象用于一个异步操作的最终完成（或失败）及其结果值的表示。(简单点说就是处理异步请求。。我们经常会做些承诺，如果我赢了你就嫁给我，如果输了我就嫁给你之类的诺言。这就是promise的中文含义。一个诺言，一个成功，一个失败。
 
-![promises]('https://mdn.mozillademos.org/files/8633/promises.png')
+!['https://mdn.mozillademos.org/files/8633/promises.png'](promises)
 
 #### resolve()
 * 继续执行 [MDN-Promise.resolve()]('https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve')
