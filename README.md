@@ -1431,7 +1431,7 @@ for (let [key,value] of Object.entries(test)) {
 
 * 每个Promise都会经历一个短暂的生命周期:
 * 先是处于进行中(pending)的状态，此操作尚未完成，所以它也是未处理(unsettled)的;
-* 一旦异步操作执行
+* 一旦异步操作执行结束，Promise则变成为已处理(settled)的状态。
 
 #### 来自MDN的一句话
 
