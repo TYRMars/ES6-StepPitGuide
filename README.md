@@ -10,6 +10,7 @@
 ---
 
 #### [hyy1115／ES6-learning](https://github.com/hyy1115/ES6-learning) `实际应用请看前端大神对该书的读后感`
+
 * `以下内容为前端小白的我对于ES6粗浅的理解认识，如有错误请多多包涵。可以直接提交issue来告诉我，来帮助其他人学习`
 
 ---
@@ -35,6 +36,7 @@
 * [01-18](https://github.com/TYRMars/JSLearn-ES6#01-18) `Decorator修饰器`
 
 ## need
+
 * `npm install gulp gulp-if gulp-concat webpack webpack-stream vinyl-named gulp-livereload gulp-plumber gulp-uglify gulp-util yargs --save-dev`
 
 ---
@@ -67,6 +69,7 @@ function test() {
 
 test();
 ```
+
 * ES6强制开启严格模式`use strict`
     * 变量未被声明，会报引用错误❌
 
@@ -77,6 +80,7 @@ function test() {
 }
 test();
 ```
+
 * let不能重复声明，否则会报错
 
 #### const
@@ -1614,6 +1618,7 @@ for (let [key,value] of Object.entries(test)) {
 
 ## 01-15
 ### 模块化
+
 * 基本概念
 * ES6的模块化语法
 * 之前JS就有模块化的欲望：如require.js
@@ -1637,6 +1642,7 @@ export class Hello{
 ```
 
 * 导入
+
 ```JavaScript
 import {A,test,Hello} from './class/lesson14';
 
