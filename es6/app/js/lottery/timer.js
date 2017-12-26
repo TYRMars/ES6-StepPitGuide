@@ -16,7 +16,13 @@ class Timer {
       let s = Math.floor((last_time-d*px_d-h*px_h-m*px_m)/px_s);
       let r = [];
       if (d>0) {
-        r.push(`<em>${d}</em>天`)
+        r.push(`<em>${d}</em>天`);
+      }
+      if (r.length||h>0) {
+        r.push(`<em>${h}</em>时`);
+      }
+      if (r.length||m>0) {
+        r.push(`<em>${m}</em>`)
       }
     }
   }
